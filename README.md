@@ -19,11 +19,11 @@
 ＊仮想環境でインストールする場合は先に`python -m venv venv`をターミナルに入力  
 
 -1 `cd childcare_ragapp`  
--2 `pip install -r requirements.txt`　（5分ほどかかります）
+-2 `pip install -r requirements.txt`　
 
-### 5. サーバを起動
+### 3. サーバを起動
 ＊事前準備として：  
-　・chat/views.py内にOpenAIのAPIキーを入力  
+　・chat/views.py 内にOpenAIのAPIキーを入力  
 を行う  
 
 ターミナルに以下を入力  
