@@ -1,0 +1,46 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+    <p>
+        <a href="{% url 'polls:index' %}"
+            class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">質問に戻る</a>
+    </p>
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+
+        <h1>{{ question.question_text }}</h1>
+
+        {% if error_message %}<p><strong><font color="red">{{ error_message }}</font></strong></p>{% endif %}
+
+        <p class="ms-3">ーラジオボタンを1つ選択し、投票しましょう！</p>
+
+        <div class="form-check mx-4 my-4">
+            {% for choice in question.choice_set.all %}
+            <input class="form-check-input h5" type="radio" name="choice" id="choice{{ forloop.counter }}"
+                value="{{ choice.id }}">
+            <label class="h5 mb-2" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+            <a href="{% url 'polls:addchoice' question.id %}"
+                class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">選択肢を追加する</a>
+
+            <div class="mt-3">
+                <input type="submit" value="投票する" class="btn btn-primary btn-lg">
+            </div>
+        </div>
+    </form>
+
+    <div class="form-check mx-4 my-4">
+        <form action="{% url 'polls:chat' question.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="upvote" value="選択肢の候補を表示する" class="btn btn-outline-secondary">
+        </form>
+        <p>＊ChatGPTが他の選択肢の候補を出してくれます</p>
+        <h5>{{ ans_header }}</h5>
+        <p>
+            {{ chat_results }}
+        </p>
+    </div>
+
+{% endblock %}

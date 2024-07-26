@@ -1,0 +1,32 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<p>
+    <a href="{% url 'polls:detail' question.id %}"
+        class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">投票画面に戻る</a>
+</p>
+
+<h3>質問項目</h3>
+<div class="ms-3">
+    {{question.question_text}}
+</div>
+
+<h3 class="mt-4">現在の選択肢</h3>
+{% for choice in question.choice_set.all %}
+<ul class="list-group list-group-flush">
+    <li class="list-group-item w-50">{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
+
+
+
+<form action="{% url 'polls:addchoice' question.id %}" method="post">
+    <div class="my-4">
+        <label for="addchoice" class="form-label h5">追加する選択肢</label>
+        {% csrf_token %}
+        <input type="text" class="form-control w-50" name="add">
+
+        <button type="submit" class="mt-2 btn btn-outline-success">追加</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+    <p>
+        <a href="{% url 'polls:index' %}"
+            class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">質問に戻る</a>
+    </p>
+
+    <h1>投票結果</h1>
+
+    <div class="container">
+
+        <h2 class="mt-4">{{ question.question_text }}</h2>
+
+        <ul class="list-group w-50 mt-3 h5">
+            {% for choice in question.choice_set.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ choice.choice_text }}
+                <span class="badge badge-primary badge-pill text-bg-success">{{ choice.votes }} vote{{choice.votes|pluralize }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="my-2">
+            <a href="{% url 'polls:detail' question.id %}"
+            class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">投票画面に戻る</a>
+        </div>
+    </div>
+
+{% endblock %}

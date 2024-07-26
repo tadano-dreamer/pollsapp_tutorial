@@ -1,0 +1,20 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+    {% if latest_question_list %}
+    {% for question in latest_question_list %}
+    <div class="list-group">
+
+        <!-- ブロックを中心に表示、幅を25%に固定、上下に余白を設定、テキストを中央揃えにする -->
+        <div class="mx-auto w-25 my-2 text-center">
+            <a href="{% url 'polls:detail' question.id %}"
+                class="list-group-item list-group-item-action list-group-item-primary"><strong>{{ question.question_text}}</strong></a>
+        </div>
+        
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+{% endblock %}

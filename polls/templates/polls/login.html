@@ -1,0 +1,21 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<h2>ログイン</h2>
+<p class="ms-2">＊アカウント情報を入力してください</p>
+
+
+ <form action="{% url 'polls:login' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="mt-2 btn btn-outline-success">ログイン</button>
+</form>
+
+<div class="mt-3">
+    <a href="{% url 'polls:signup' %}"
+                    class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">アカウント登録</a>
+
+</div>
+
+
+{% endblock %}
